@@ -299,5 +299,5 @@ dashboard_files/
 **/.DS_Store
 
 hdfs/data/nameNode/*
-hdfs/data/daaNode/*
+hdfs/data/dataNode/*
 hdfs/data/secondaryNameNode/*
