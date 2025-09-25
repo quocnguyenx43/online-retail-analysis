@@ -19,6 +19,8 @@ pytest:
 	docker exec webserver pytest -p no:warnings -v /opt/airflow/tests
 
 distclean:
-	rm -rf ./hdfs/data/nameNode/* ./hdfs/data/dataNode/* ./hdfs/data/secondaryNameNode/*
+	find ./hdfs/data/nameNode     -mindepth 1 ! -name '.gitkeep' -delete
+	find ./hdfs/data/dataNode     -mindepth 1 ! -name '.gitkeep' -delete
+	find ./hdfs/data/secondaryNameNode -mindepth 1 ! -name '.gitkeep' -delete
 
 .PHONY: hdfs hdfs-down hdfs-client airflow airflow-down distclean pytest
