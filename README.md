@@ -8,4 +8,4 @@ make hdfs
 make airflow
 ```
 
-View more detail in: ./Makefile
+View more detail in: `Makefile`
