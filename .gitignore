@@ -301,3 +301,6 @@ dashboard_files/
 hdfs/data/nameNode/*
 hdfs/data/dataNode/*
 hdfs/data/secondaryNameNode/*
+!hdfs/data/nameNode/.gitkeep
+!hdfs/data/dataNode/.gitkeep
+!hdfs/data/secondaryNameNode/.gitkeep
