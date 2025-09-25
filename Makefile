@@ -1,5 +1,8 @@
 # Setup Containers
 
+init:
+	docker network create online-retail-analytics
+
 hdfs:
 	docker compose -f ./hdfs/docker-compose.yaml up -d
 

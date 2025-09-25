@@ -1,1 +1,11 @@
-docker network create online-retail-analytics
+# How to Start
+
+```bash
+make init
+
+make hdfs
+
+make airflow
+```
+
+View more detail in: ./Makefile
