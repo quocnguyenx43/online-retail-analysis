@@ -1,0 +1,72 @@
+services:
+  namenode:
+    image: 'apache/hadoop:3.3.5'
+    container_name: namenode
+    hostname: namenode
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+    volumes:
+      - './data/nameNode:/tmp/hadoop/data/nameNode'
+      - './conf:/opt/hadoop/etc/hadoop'
+      - './scripts/init-namenode.sh:/init-namenode.sh'
+    ports:
+      - '9870:9870'
+    command:
+      - /bin/bash
+      - /init-namenode.sh
+    networks:
+      hdfs_network:
+        ipv4_address: 172.20.0.2
+
+  datanode1:
+    image: 'apache/hadoop:3.3.5'
+    container_name: datanode1
+    hostname: datanode1
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+    volumes:
+      - './data/dataNode:/tmp/hadoop/data/dataNode'
+      - './conf:/opt/hadoop/etc/hadoop'
+      - './scripts/init-datanode.sh:/init-datanode.sh'
+    ports:
+      - '9864:9864'
+    depends_on:
+      - namenode
+    command:
+      - /bin/bash
+      - /init-datanode.sh
+    networks:
+      hdfs_network:
+        ipv4_address: 172.20.0.3
+
+  secondarynamenode:
+    image: 'apache/hadoop:3.3.5'
+    container_name: secondarynamenode
+    hostname: secondarynamenode
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+    volumes:
+      - './data/secondaryNameNode:/tmp/hadoop/data/secondaryNameNode'
+      - './conf:/opt/hadoop/etc/hadoop'
+      - './scripts/init-secondarynamenode.sh:/init-secondarynamenode.sh'
+    depends_on:
+      - namenode
+    ports:
+      - '9868:9868'
+    command:
+      - /bin/bash
+      - /init-secondarynamenode.sh
+    networks:
+      hdfs_network:
+        ipv4_address: 172.20.0.4
+
+networks:
+  hdfs_network:
+    name: hdfs_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
