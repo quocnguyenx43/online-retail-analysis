@@ -1,0 +1,8 @@
+# Ignore all Jupyter notebooks
+.*\.ipynb
+
+# Ignore a utils folder
+^utils/
+
+# Ignore test DAGs
+test_.*\.py
